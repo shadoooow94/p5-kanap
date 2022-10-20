@@ -22,7 +22,7 @@ function addProducts(kanap) {
     const anchor = makeAnchor(_id)
 
     const article = document.createElement("article")
-    const image = makeImage(imageUrl, altTxt)
+    const image = makeImageDiv(imageUrl, altTxt)
     const h3 = makeH3(name)
     const p = makeParagraphe(description)
 
@@ -49,7 +49,7 @@ function appendArticleToAnchor(anchor, article) {
     }
 }
 /* recup des images et texte*/
-function makeImage(_imageURL, _altTxt) {
+function makeImageDiv(_imageURL, _altTxt) {
     const image = document.createElement("img")
     image.src = _imageURL
     image.alt = _altTxt
