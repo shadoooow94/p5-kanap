@@ -1,11 +1,11 @@
 
-const cart = []
+const cart = []/*tableau pour stocker les items du panier global*/
 
-retrieveItemsFromCache()
-cart.forEach((item) => displayItem(item))
+retrieveItemsFromCache() /*recupere les items du cache*/
+cart.forEach((item) => displayItem(item)) /*pour chaque item du panier on affiche l'article*/
 
-function retrieveItemsFromCache(){
-    const numberIfItems = localStorage.length
+function retrieveItemsFromCache(){/*recupere les items du cache*/
+    const numberIfItems = localStorage.length/*recupere le nombre d'items dans le cache*/
     for(let i = 0; i < numberIfItems; i++){
     const item = localStorage.getItem(localStorage.key(i)) || ""
     const itemObject = JSON.parse(item)/* pars = convertir en objet un string*/
@@ -15,23 +15,74 @@ function retrieveItemsFromCache(){
 
 function displayItem(item){
     const article = makeArticle(item) /*creation de l'article*/
-    const imageDiv =  makeImageDiv(item) 
-    article.appendChild(imageDiv) 
+    const imageDiv =  makeImageDiv(item) /*creation de la div pour l'image*/
+    article.appendChild(imageDiv) /*ajout de la div dans l'article*/
 
-   makeCartContent(item)
-   article.appendChild(cartItemContent)
-   displayArticle(article) /*affichage de l'article*/
+    const cartItemContent = makeCartContent(item) /*creation du contenu de l'article*/
+    article.appendChild(cartItemContent) /*ajout du contenu dans l'article*/
+    displayArticle(article) /*affichage de l'article*/
+    displayTotalQuantity() /*affichage de la quantité total*/
+    displayTotalPrice() /*affichage du prix total*/
 }
+function displayTotalQuantity(){
+    const totalQuantity = document.querySelector("#totalQuantity")
+    const total = cart.reduce((total, item) => total + item.quantity, 0)
+    totalQuantity.textContent = total
+}
+function displayTotalPrice(){
+    const totalPrice = document.querySelector("#totalPrice")
+    const total = cart.reduce((total, item) => total + item.price * item.quantity, 0)
+    totalPrice.textContent = total 
 
+}
 
 function makeCartContent(item){
-    const description = makeDescription(item)
-    const settings = MakeSettings()
-   return ""
+    const cartItemContent = document.createElement("div") /*creation de la div pour le contenu de l'article*/
+    cartItemContent.classList.add("cart__item__content") /*ajout de la class*/
+
+    const description = makeDescription(item) /*creation de la description*/
+    const settings = MakeSettings(item) /*creation des settings*/
+    
+    cartItemContent.appendChild(description) /*ajout de la description dans le contenu de l'article*/
+    cartItemContent.appendChild(settings) /*ajout des settings dans le contenu de l'article*/
+    return cartItemContent
+   
 }
 function MakeSettings(item){
-return ""
+    const settings = document.createElement("div")
+    settings.classList.add("cart__item__content__settings")
+
+    addQuantityToSettings(settings, item)
+    addDeleteToSettings(settings)
+    return settings
 }
+function addDeleteToSettings(settings){
+    const quantity = document.createElement("div")
+    quantity.classList.add("cart__item__content__settings__delete")
+    const p = document.createElement("p")
+    p.textContent = "Supprimer"
+    quantity.appendChild(p)
+    settings.appendChild(quantity)
+}
+
+function addQuantityToSettings(settings, item){
+    const quantity = document.createElement("div")
+    quantity.classList.add("cart__item__content__settings__quantity")
+    const p = document.createElement("p")
+    p.textContent = "Qté :"
+    quantity.appendChild(p)
+    const input = document.createElement("input")
+    input.type = "number"
+    input.classList.add("itemQuantity")
+    input.name = "itemQuantity"
+    input.min = "1"
+    input.max = "100"
+    input.value = item.quantity
+    quantity.appendChild(input)
+    settings.appendChild(quantity)
+}
+
+
 function makeDescription(item){
  const description = document.createElement("div")
     description.classList.add("cart__item__content__description")
