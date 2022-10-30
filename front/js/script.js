@@ -1,12 +1,11 @@
-fetch("http://localhost:3000/api/products") /* recup du tableau*/
+fetch("http://localhost:3000/api/products") /* appel de l'api*/
 .then((res) => res.json())
 .then((data) => {
-    console.log(data)
     return addProducts(data)
 })
 
 
-function addProducts(kanap) {
+function addProducts(kanap) { /* boucle pour afficher les produits*/
   /*const _id = kanap[0]._id
     const imageURL = kanap[0].imageURL
     const altTxt = kanap[0].altTxt
@@ -14,16 +13,16 @@ function addProducts(kanap) {
     const description = kanap[0].description*/
 
     
-    kanap.forEach(kanap => {
+    kanap.forEach(kanap => { 
         
     
     
-    const {_id, imageUrl, altTxt, name, description} = kanap 
-    const anchor = makeAnchor(_id)
+    const {_id, imageUrl, altTxt, name, description} = kanap  
+    const anchor = makeAnchor(_id) 
 
-    const article = document.createElement("article")
-    const image = makeImageDiv(imageUrl, altTxt)
-    const h3 = makeH3(name)
+    const article = document.createElement("article") 
+    const image = makeImageDiv(imageUrl, altTxt) 
+    const h3 = makeH3(name) 
     const p = makeParagraphe(description)
 
     article.appendChild(image)
@@ -34,13 +33,13 @@ function addProducts(kanap) {
  });
 }
 
-function makeAnchor(id) {
-    const anchor = document.createElement("a")
+function makeAnchor(id) { 
+    const anchor = document.createElement("a") /* creation de l'element a*/
     anchor.href = "./product.html?id=" + id
     return anchor
 }
-/* cree une balise article*/
-function appendArticleToAnchor(anchor, article) {
+
+function appendArticleToAnchor(anchor, article) { /* ajout des elements a la page*/
     const items = document.getElementById("items")
     if (items) {
         items.appendChild(anchor)

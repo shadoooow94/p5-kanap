@@ -1,20 +1,20 @@
-const UrlSearchParams = window.location.search
-const urlParams = new URLSearchParams(UrlSearchParams)
-const id = urlParams.get("id")
-if (id != null){
-    let itemPrice = 0
-    let imgUrl, altText, articleName
+const UrlSearchParams = window.location.search // récupère l'url
+const urlParams = new URLSearchParams(UrlSearchParams) // récupère les paramètres de l'url
+const id = urlParams.get("id") // récupère l'id du produit
+if (id != null){ // si l'id n'est pas null
+    let itemPrice = 0 // prix de l'article
+    let imgUrl, altText, articleName 
 }
 /* transfer les données de l'index a cette page*/
 
 
-fetch(`http://localhost:3000/api/products/${id}`) 
-.then((res) => res.json())
-.then((data) => {
+fetch(`http://localhost:3000/api/products/${id}`)  // récupère les données de l'api
+.then((res) => res.json()) 
+.then((data) => {   
     info(data)})
 
 
-function info (kanaper){
+function info (kanaper){   
     /*const altTxt = kanapé.altTxt
     const colors = kanapé.colors
     const description = kanapé.description
@@ -80,13 +80,15 @@ const button = document.querySelector("#addToCart")
         const color = document.querySelector("#colors").value
         const quantity = document.querySelector("#quantity").value
 
+
         if (isOrderInvalid(color, quantity)) return
             saveOrder(color, quantity) 
             
             
         }
 
-    function saveOrder(color, quantity){
+    function saveOrder(color, quantity){ // enregistre les données 
+        const key = `${id}_${color}`
        const data = {
             id: id,
             color: color,
@@ -96,10 +98,12 @@ const button = document.querySelector("#addToCart")
             altTxt: altText,
             name : articleName
             
+             
+            
            }
-           localStorage.setItem(id, JSON.stringify(data))
+           localStorage.setItem(key, JSON.stringify(data))
     }
-        function isOrderInvalid(color, quantity){
+        function isOrderInvalid(color, quantity){ // vérifie si les données sont valides
             if (color == null || color === "" || quantity == null  || quantity == 0){
                 alert("veuillez choisir une couleur et une quantité")
                 return true
