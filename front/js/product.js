@@ -14,7 +14,7 @@ fetch(`http://localhost:3000/api/products/${id}`)  // récupère les données de
     info(data)})
 
 
-function info (kanaper){   
+function info (kanaper){    // affiche les données
     /*const altTxt = kanapé.altTxt
     const colors = kanapé.colors
     const description = kanapé.description
@@ -51,6 +51,7 @@ function makePrice(price){
     const span = document.getElementById("price")
     if (span != null) span.textContent = price
     
+    
 }
 function makeCartContent(description){
     const p = document.getElementById("description")
@@ -58,7 +59,7 @@ function makeCartContent(description){
     
 }
 
-function makeColors(colors){
+function makeColors(colors){ /* affiche les couleurs */
     const select = document.getElementById("colors")
     if (select != null){
         colors.forEach((color) => {
@@ -76,9 +77,10 @@ const button = document.querySelector("#addToCart")
     button.addEventListener("click", handleClick)
     }
 
-    function handleClick() {
+    function handleClick() {  /* envoie les données */
         const color = document.querySelector("#colors").value
         const quantity = document.querySelector("#quantity").value
+
 
 
         if (isOrderInvalid(color, quantity)) return
@@ -104,7 +106,7 @@ const button = document.querySelector("#addToCart")
            localStorage.setItem(key, JSON.stringify(data))
     }
         function isOrderInvalid(color, quantity){ // vérifie si les données sont valides
-            if (color == null || color === "" || quantity == null  || quantity == 0){
+            if (color == null || color === "" || quantity == null  || quantity == 0 || quantity > 100){
                 alert("veuillez choisir une couleur et une quantité")
                 return true
             }

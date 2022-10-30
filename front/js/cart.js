@@ -212,7 +212,7 @@ function submitForm(e){/*envoie du formulaire*/
 return false
 }
 
-    function isFormInvalid(){/*verifie le formulaire*/
+    function isFormInvalid(){/*verifie le formulaire*/ 
         const form = document.querySelector(".cart__order__form")
         const inputs = document.querySelectorAll("input")
         inputs.forEach((input) => {/*pour chaque input*/
@@ -222,7 +222,7 @@ return false
     }
     return false
 })}
-    function makeRequestBody(){ 
+    function makeRequestBody(){  
         const form = document.querySelector(".cart__order__form")/*recupere le formulaire*/
         const firstName = form.firstName.value/*recupere la valeur du prenom*/
         const lastName = form.lastName.value/*recupere la valeur du nom*/
@@ -250,18 +250,16 @@ function getIdFromCache(){/*recupere les id des produits dans le cache*/
         const key = localStorage.key(i) /*recupere la clé*/
         const item = JSON.parse(localStorage.getItem(key)) /*recupere les données*/
         idArray.push(item.id) /*ajoute les id dans le tableau*/
-
+ 
 
     }
     return idArray}
-
+    
 
 
    
    
     /*probleme de l id qui ne se supprime pas du local storage ligne 120*/
-  // prix ne s affiche plus//
       /* faire un plan de test*/
-    
-    /* additionner les memes produits  */
     /*probleme d ajout du meme produit dans le local storage a partir de panier */
+    
