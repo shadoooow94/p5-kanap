@@ -16,7 +16,14 @@ function retrieveItemsFromCache(){/*recupere les items du cache*/
 }
 }
 
-function displayItem(item){ /*affiche l'article*/
+async function displayItem(item){ /*affiche l'article*/ 
+await fetch(`http://localhost:3000/api/products/${item.id}`)  // récupère les données de l'api
+.then((res) => res.json()) 
+.then((data) => {   
+    item.price= data.price}) 
+    
+   
+
     const article = makeArticle(item) /*creation de l'article*/
     const imageDiv =  makeImageDiv(item) /*creation de la div pour l'image*/
     article.appendChild(imageDiv) /*ajout de la div dans l'article*/
@@ -27,6 +34,7 @@ function displayItem(item){ /*affiche l'article*/
     displayTotalQuantity() /*affichage de la quantité total*/
     displayTotalPrice() /*affichage du prix total*/
 }
+
 function displayTotalQuantity(){/*affichage de la quantité total*/
     const totalQuantity = document.querySelector("#totalQuantity")
     const total = cart.reduce((total, item) => total + item.quantity, 0)
@@ -118,20 +126,22 @@ function uptadePriceAndQuantity(id, newValue, item ){/*mise a jour du prix et de
     
 }
 function deleteDataFromCache(item){/*supprime les données du cache*/
-const key = '${item.id} - ${item.color}'  /*recupere la clé de l'item  et couleur a supprimer*/
+const key = `${item.id}_${item.color}`  /*recupere la clé de l'item  et couleur a supprimer*/
     localStorage.removeItem(key) /*supprime les données du cache*/
+    
     
 
 }
 function saveNewDataToCache(item){/*sauvegarde les nouvelles données dans le cache / storage*/
 const dataToSave = JSON.stringify(item) /*changer la valeur dans le storage*/
-const key = '${item.id} - ${item.color}' /*recupere l'id de l'item et color*/
+const key = `${item.id}_${item.color}` /*recupere l'id de l'item et color*/
 localStorage.setItem(key, dataToSave)/*sauvegarde et supp les nouvelles données dans le cache / storage*/
 }
 
 function makeDescription(item){/*creation de la description*/
  const description = document.createElement("div")
     description.classList.add("cart__item__content__description")
+    
 
     const h2 = document.createElement("h2")
     h2.textContent = item.name
@@ -219,8 +229,9 @@ return false
             if (input.value === ""){/*si l'input est vide*/
                 alert("Veuillez remplir tous les champs")/*affiche un message d'erreur*/
                 return true
+               
     }
-    return false
+    return false 
 })}
     function makeRequestBody(){  
         const form = document.querySelector(".cart__order__form")/*recupere le formulaire*/
@@ -262,4 +273,5 @@ function getIdFromCache(){/*recupere les id des produits dans le cache*/
     /*probleme de l id qui ne se supprime pas du local storage ligne 120*/
       /* faire un plan de test*/
     /*probleme d ajout du meme produit dans le local storage a partir de panier */
+    /*probleme de prix si jer le garde pas dans le local storage*/
     

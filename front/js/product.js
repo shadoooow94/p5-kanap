@@ -89,13 +89,13 @@ const button = document.querySelector("#addToCart")
             
         }
 
-    function saveOrder(color, quantity){ // enregistre les données 
+    function saveOrder(color, quantity){ // enregistre les données  dans le local storage
         const key = `${id}_${color}`
        const data = {
             id: id,
             color: color,
             quantity: Number(quantity),
-            price: itemPrice,
+          
             imageUrl: imgUrl,
             altTxt: altText,
             name : articleName
@@ -103,7 +103,7 @@ const button = document.querySelector("#addToCart")
              
             
            }
-           localStorage.setItem(key, JSON.stringify(data))
+           localStorage.setItem(key, JSON.stringify(data)) 
     }
         function isOrderInvalid(color, quantity){ // vérifie si les données sont valides
             if (color == null || color === "" || quantity == null  || quantity == 0 || quantity > 100){
