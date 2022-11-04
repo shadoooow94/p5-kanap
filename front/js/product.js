@@ -1,17 +1,17 @@
-const UrlSearchParams = window.location.search // récupère l'url
-const urlParams = new URLSearchParams(UrlSearchParams) // récupère les paramètres de l'url
-const id = urlParams.get("id") // récupère l'id du produit
+const UrlSearchParams = window.location.search  // récupère l'id de l'url
+const urlParams = new URLSearchParams(UrlSearchParams)  
+const id = urlParams.get("id") 
 if (id != null){ // si l'id n'est pas null
     let itemPrice = 0 // prix de l'article
-    let imgUrl, altText, articleName 
+    let imgUrl, altText, articleName  // image, texte et nom de l'article
 }
 /* transfer les données de l'index a cette page*/
 
 
-fetch(`http://localhost:3000/api/products/${id}`)  // récupère les données de l'api
-.then((res) => res.json()) 
-.then((data) => {   
-    info(data)})
+fetch(`http://localhost:3000/api/products/${id}`) // récupère les données de l'api
+.then((res) => res.json())  /* transforme les données en json*/
+.then((data) => {   /* ajoute les données a la page*/
+    info(data)}) 
 
 
 function info (kanaper){    // affiche les données
@@ -23,7 +23,7 @@ function info (kanaper){    // affiche les données
     const price = kanapé.price
     const _id = kanapé._id*/
 
-    const {altTxt, colors, description, imageUrl, name, price} = kanaper
+    const {altTxt, colors, description, imageUrl, name, price} = kanaper 
     itemPrice = price
     imgUrl = imageUrl
     altText = altTxt
@@ -38,8 +38,8 @@ function info (kanaper){    // affiche les données
     const image = document.createElement("img")
     image.src = imageUrl
     image.alt = altTxt
-    const parent = document.querySelector(".item__img")
-    if (parent != null) parent.appendChild(image)
+    const parent = document.querySelector(".item__img") 
+    if (parent != null) parent.appendChild(image) 
    }
 function makeTitle(name){
     const h1 = document.getElementById("title")
@@ -72,9 +72,9 @@ function makeColors(colors){ /* affiche les couleurs */
     }
 }
 
-const button = document.querySelector("#addToCart")
+const button = document.querySelector("#addToCart") 
 {
-    button.addEventListener("click", handleClick)
+    button.addEventListener("click", handleClick) /* ajoute un écouteur d'événement au bouton */
     }
 
     function handleClick() {  /* envoie les données */
@@ -95,9 +95,9 @@ const button = document.querySelector("#addToCart")
             id: id,
             color: color,
             quantity: Number(quantity),
-          
+           
             imageUrl: imgUrl,
-            altTxt: altText,
+            altTxt: altText, 
             name : articleName
             
              

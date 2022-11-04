@@ -1,11 +1,12 @@
-fetch("http://localhost:3000/api/products") /* appel de l'api*/
+fetch("http://localhost:3000/api/products") /* appel de l'api pour récuperé les données */
 .then((res) => res.json())
 .then((data) => {
     return addProducts(data)
 })
 
 
-function addProducts(kanap) { /* boucle pour afficher les produits*/
+function addProducts(kanap) { /* ajout des elements a la page*/
+
   /*const _id = kanap[0]._id
     const imageURL = kanap[0].imageURL
     const altTxt = kanap[0].altTxt
@@ -13,15 +14,15 @@ function addProducts(kanap) { /* boucle pour afficher les produits*/
     const description = kanap[0].description*/
 
     
-    kanap.forEach(kanap => { 
+    kanap.forEach(kanap => {  /* boucle pour afficher les produits*/
         
     
     
-    const {_id, imageUrl, altTxt, name, description} = kanap  
-    const anchor = makeAnchor(_id) 
+    const {_id, imageUrl, altTxt, name, description} = kanap   /* recup des données*/
+    const anchor = makeAnchor(_id)  
 
-    const article = document.createElement("article") 
-    const image = makeImageDiv(imageUrl, altTxt) 
+    const article = document.createElement("article")  /* creation des elements*/
+    const image = makeImageDiv(imageUrl, altTxt)  
     const h3 = makeH3(name) 
     const p = makeParagraphe(description)
 
@@ -33,7 +34,7 @@ function addProducts(kanap) { /* boucle pour afficher les produits*/
  });
 }
 
-function makeAnchor(id) { 
+function makeAnchor(id) {  /* creation des liens*/
     const anchor = document.createElement("a") /* creation de l'element a*/
     anchor.href = "./product.html?id=" + id
     return anchor

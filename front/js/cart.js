@@ -107,8 +107,7 @@ function addQuantityToSettings(settings, item){ /*ajout de la quantité dans les
     input.min = "1"
     input.max = "100"
     input.value = item.quantity
-    input.addEventListener("input", () => uptadePriceAndQuantity(item.id, input.value , item))/*ajout d'un event pour modifier la quantité*/
-    
+    input.addEventListener("input", () => uptadePriceAndQuantity(item.id, input.value , item)) //ajout d'un event pour modifier la quantité
     quantity.appendChild(input)
     settings.appendChild(quantity)
     
@@ -126,7 +125,7 @@ function uptadePriceAndQuantity(id, newValue, item ){/*mise a jour du prix et de
     
 }
 function deleteDataFromCache(item){/*supprime les données du cache*/
-const key = `${item.id}_${item.color}`  /*recupere la clé de l'item  et couleur a supprimer*/
+const key = `${item.id}_${item.color}`  /*recupere la clé de l'item a supprimer*/
     localStorage.removeItem(key) /*supprime les données du cache*/
     
     
@@ -196,8 +195,8 @@ function submitForm(e){/*envoie du formulaire*/
 
     const body =  makeRequestBody()
 
-    fetch
-    ("http://localhost:3000/api/products/order", {
+    fetch 
+    ("http://localhost:3000/api/products/order", {  /*envoie les données du formulaire*/
         method: "POST",
         body: JSON.stringify(body),
         headers: {
@@ -206,8 +205,8 @@ function submitForm(e){/*envoie du formulaire*/
     })
     .then((response) => response.json())
     .then((data) => {
-        const orderId = data.orderId
-        window.location.href = `confirmation.html?orderId=${orderId}`
+        const orderId = data.orderId /*recupere l'id de la commande*/
+        window.location.href = `confirmation.html?orderId=${orderId}` /*redirige vers la page de confirmation*/
         
        
     
@@ -233,7 +232,7 @@ return false
     }
     return false 
 })}
-    function makeRequestBody(){  
+    function makeRequestBody(){   /* specification pour la page confirmation*/
         const form = document.querySelector(".cart__order__form")/*recupere le formulaire*/
         const firstName = form.firstName.value/*recupere la valeur du prenom*/
         const lastName = form.lastName.value/*recupere la valeur du nom*/
@@ -270,8 +269,3 @@ function getIdFromCache(){/*recupere les id des produits dans le cache*/
 
    
    
-    /*probleme de l id qui ne se supprime pas du local storage ligne 120*/
-      /* faire un plan de test*/
-    /*probleme d ajout du meme produit dans le local storage a partir de panier */
-    /*probleme de prix si jer le garde pas dans le local storage*/
-    
